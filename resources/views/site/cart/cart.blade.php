@@ -10,11 +10,14 @@
             <div class="col-lg-12">
             <div class="sort mb-1 mb-0">
               <div class="row justify-content-between mb-0 pb-0">
-                <div class="col-md-3 col-sm-6">
+                <div class="col-md-4 col-sm-4">
                   <h3>Cart <span id="productCount">(1)</span></h3>
                 </div>
-                <div class="col-md-3 col-sm-6">
-                  <a href="#" class="greenBtn" style="color: #fff !important">CHECKOUT ALL</a>
+                <div class="col-md-4 col-sm-4">
+                  <h3 class="text-center">Total <span id="productCount">(1)</span></h3>
+                </div>
+                <div class="col-md-4 col-sm-4">
+                  <a href="#" class="greenBtn" style="color: #fff !important; float:right;">CHECKOUT ALL</a>
                 </div>
               </div>
             </div>
