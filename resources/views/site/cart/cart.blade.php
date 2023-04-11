@@ -6,6 +6,29 @@
     @endphp
     <section class="cart pt-5 mt-5">
         <div class="container" data-aos="fade-up">
+          <div class="row mt-4">
+            <div class="col-lg-12">
+            <div class="sort mb-1 mb-0">
+              <div class="row justify-content-between mb-0 pb-0">
+                <div class="col-md-3 col-sm-6">
+                  <h3>Cart <span id="productCount">(1)</span></h3>
+                </div>
+                <div class="col-md-3 col-sm-6">
+                  <a href="#" class="greenBtn" style="color: #fff !important">CHECKOUT ALL</a>
+                </div>
+              </div>
+            </div>
+            <hr>
+            <div class="col-lg-12">
+              <div class="text-center text-danger mt-5">
+                <p><b>
+                  You haven't saved any items to your wishlist yet. Start shopping and add your favorite items to your wishlist.
+                </b></p>
+              </div>
+            </div>
+            
+            </div>
+          </div>
             <div class="row">
                 <div class="col-lg-6 col-sm-12">
                     @foreach ($items as $item)
