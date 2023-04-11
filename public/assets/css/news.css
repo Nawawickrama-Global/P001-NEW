@@ -1,0 +1,120 @@
+#header-2 {
+    background: #000;
+    transition: all 0.5s;
+    z-index: 997;
+    padding: 20px 0;
+    position: absolute;
+    width: 100%;
+    top: 0px;
+  }
+
+textarea.form-control{
+    width: 100%;
+    padding: 10px;
+    margin: 5px 0;
+    border-radius: 5px;
+    border: 1px solid var(--primary-color);
+  }
+
+  .btn-contact {
+    margin-bottom: 15px;
+    color: #fff;
+    background-color: var(--secondary-color);
+    padding: 8px 12px;
+    transition: all 0.3s ease;
+  }
+  .btn-contact:hover {
+    background-color: var(--secondary-color-less);
+    color: #fff;
+  }
+  .sheet-link{
+    color: #004c45;
+    text-decoration: underline;
+    margin: 0 5px;
+    font-weight: 900;
+  }
+  .radio-btn {
+          display: inline-block;
+          position: relative;
+          margin-right: 20px;
+  }
+  .radio-btn input[type="radio"] {
+          position: absolute;
+          opacity: 0;
+          cursor: pointer;
+  }   
+  
+  .radio-btn label {
+          display: inline-block;
+          width: 31px;
+          height: 31px;
+          border-radius: 50%;
+          border: 1px solid #dcdcdc;
+  }
+  .radio-btn input[type="radio"]:checked + label {
+          border-color: #004c45;
+  }
+  .radio-btn img {
+          display: block;
+          margin: 0 auto;
+          width: 30px;
+          height: 30px;
+          border-radius: 15px;
+  }  
+  .radio-btn input[type="radio"]:checked + label img {
+          box-shadow: 0 0 0 2px #004c45;
+  }  
+  
+  /* ________________ */
+  .shiping-btn {
+          display: inline-block;
+          position: relative;
+          margin-right: 20px;
+  }
+  .shiping-btn input[type="radio"] {
+          position: absolute;
+          opacity: 0;
+          cursor: pointer;
+  }  
+  .shiping-btn label {
+          display: inline-block;
+          width: 101px;
+          height: 31px;
+          border-radius: 5px;
+          border: 1px solid #dcdcdc;
+  }
+  .shiping-btn input[type="radio"]:checked + label {
+          border-color: #004c45;
+  }  
+  .shiping-btn img {
+          display: block;
+          margin: 0 auto;
+          width: 100px;
+          height: 30px;
+          border-radius: 5px;
+  }
+  .shiping-btn input[type="radio"]:checked + label img {
+          box-shadow: 0 0 0 2px #004c45;
+  }
+  .shiping-text{
+    font-size: 16px;
+    color: #004c45;
+  }
+
+.gold-border-top{
+    border-top: 2px solid var(--primary-color);
+}
+
+.gold-border-bottom{
+    border-bottom: 2px solid var(--primary-color);
+}
+.count-indicator {
+        position: relative;
+        background-color: #004c45;
+        color: #ffffff;
+        padding: 0 10px;
+        border-radius: 10px;
+        bottom: 8px;
+        left: -5px;
+        z-index: 99;
+    }
