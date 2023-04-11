@@ -392,5 +392,27 @@
                 }
             })
         }
+
+        $('.wish-list-button').click(function() {
+            let product_id = $(this).data('id');
+            let $this = $(this);
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                url: "{{ route('add-to-wish') }}",
+                method: "POST",
+                data: {
+                    id: product_id
+                },
+                success: function(data) {
+                    if (data.wishlist) {
+                        $this.html('<i class="bi bi-heart-fill"></i>');
+                    } else {
+                        $this.html('<i class="bi bi-heart"></i>');
+                    }
+                }
+            })
+        });
     </script>
 @endpush

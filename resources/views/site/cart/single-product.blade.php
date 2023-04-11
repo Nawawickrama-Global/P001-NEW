@@ -69,26 +69,30 @@
                                 <input type="hidden" name="product_id" value="{{ $product->product_id }}">
                                 <div class="color bb pb-3 mt-2">
                                     @if ($product->variant->count() == 1)
-                                    <p><strong></strong> <span id="selector" data-price="{{ $product->variant->first()->sales_price }}"></span></p>
-                                    <input type="hidden" name="size" value="{{ $product->variant->first()->variant_id }}">
+                                        <p><strong></strong> <span id="selector"
+                                                data-price="{{ $product->variant->first()->sales_price }}"></span></p>
+                                        <input type="hidden" name="size"
+                                            value="{{ $product->variant->first()->variant_id }}">
                                     @else
-                                    <p><strong>Size : </strong> <span id="selector"></span></p>
-                                    <div class="row">
-                                        <div class="col-lg-2 mt-2">
-                                            <select class="form-control" name="size" id="size"
-                                                style="width: unset !important">
-                                                <option value="" selected disabled>Select Size</option>
+                                        <p><strong>Size : </strong> <span id="selector"></span></p>
+                                        <div class="row">
+                                            <div class="col-lg-2 mt-2">
+                                                <select class="form-control" name="size" id="size"
+                                                    style="width: unset !important">
+                                                    <option value="" selected disabled>Select Size</option>
                                                     @foreach ($product->variant as $variant)
-                                                    <option data-price="{{ $variant->sales_price }}"
-                                                    value="{{ $variant->variant_id }}">{{ $variant->size }}</option>
+                                                        <option data-price="{{ $variant->sales_price }}"
+                                                            value="{{ $variant->variant_id }}">{{ $variant->size }}
+                                                        </option>
                                                     @endforeach
-                                            </select>
+                                                </select>
+                                            </div>
                                         </div>
-                                    </div>
                                     @endif
                                 </div>
 
-                                <div class="color bb pb-3 mt-2 {{ $product->variant->count() == 1 ? '' : 'd-none' }}" id="finishes">
+                                <div class="color bb pb-3 mt-2 {{ $product->variant->count() == 1 ? '' : 'd-none' }}"
+                                    id="finishes">
                                     @foreach ($product->productAttr as $index => $productAttr)
                                         <div>
                                             <p><strong>{{ $productAttr->attribute->name }} : </strong> <span
@@ -125,16 +129,16 @@
                                         </div>
                                     </div>
                                     {{-- <input type="hidden" name="total_price" id="total_price">
-                                    <button class="btn btn-buy" @if($product->variant->count() != 1) disabled @endif tabindex="0">
+                                    <button class="btn btn-buy" @if ($product->variant->count() != 1) disabled @endif tabindex="0">
                                         <i class="fa fa-shopping-cart"></i> 
                                     </button> --}}
                                     <button type="button" class="btn btn-buy" id="add-to-cart">
                                         <i class="fa fa-shopping-cart"></i> ADD TO CART
                                     </button>
                                     <button type="button" class="btn btn-cart" id="add-to-cart" tabindex="0"
-                                    style="border: 2px solid #ba9739">
-                                    <i class="fa fa-shopping-cart"></i> ADD TO QUOTE
-                                </button>
+                                        style="border: 2px solid #ba9739">
+                                        <i class="fa fa-shopping-cart"></i> ADD TO QUOTE
+                                    </button>
                                 </div>
                             </form>
                         </div>
@@ -279,27 +283,37 @@
                                 <div class="card">
                                     <div class="card-img">
                                         <div class="wishlist">
-                                            <button>
-                                                <i class="bi bi-heart"></i>
-                                                <i class="bi bi-heart-fill d-none"></i>
+                                            <button class="wish-list-button" data-id="{{ $suggestion->product_id }}">
+                                                {!! Auth::check() && $suggestion->wishList->where('user_id', Auth::user()->id)->count() != 0
+                                                    ? '<i class="bi bi-heart-fill"></i>'
+                                                    : '<i
+                                                                                                class="bi bi-heart"></i>' !!}
                                             </button>
                                         </div>
-                                        <img src="{{ asset('storage/images/' . $suggestion->feature_image) }}"
-                                            alt="" class="img-fluid">
+                                        <a href="{{ route('view-item', $suggestion->product_id) }}">
+                                            <img src="{{ asset('storage/images/' . $suggestion->feature_image) }}"
+                                                alt="" class="img-fluid" />
+                                        </a>
+
                                     </div>
                                     <div class="content">
-                                        <a href="#">
+                                        <a href="{{ route('view-item', $suggestion->product_id) }}">
                                             <p>{{ $suggestion->title }}</p>
-                                            <p><span>{{ $product->variant->count() > 1 ? Config::get('app.currency_code') . $product->variant->min('sales_price') . ' - ' . Config::get('app.currency_code') . $product->variant->max('sales_price') : Config::get('app.currency_code') . $product->variant->min('sales_price') }}</span>
+                                            <p>
+                                                <span>{{ $suggestion->variant->count() > 1
+                                                    ? Config::get('app.currency_code') .
+                                                        $suggestion->variant->min('sales_price') .
+                                                        ' - ' .
+                                                        Config::get('app.currency_code') .
+                                                        $suggestion->variant->max('sales_price')
+                                                    : Config::get('app.currency_code') . $suggestion->variant->min('sales_price') }}</span>
                                             </p>
                                         </a>
                                     </div>
-                                    <a href="{{ route('view-item', $suggestion->product_id) }}"
-                                        class="stretched-link"></a>
+
                                 </div>
                             </div>
                         @endforeach
-
                         <!-- End product item -->
                     </div>
                     <div class="swiper-pagination"></div>
@@ -308,58 +322,64 @@
         </section>
         <!-- End  Section -->
         <!-- ======= Popular Section ======= -->
-      <section class="popular pt-5">
-        <div class="container" data-aos="fade-up">
-          <dv class="row justify-content-center">
-            <div class="col-md-9">
-              <header class="text-center mb-3">
-                <h3 class="mb-0">RECENTLY VIEWED</h3>
-                <div class="line mt-0"></div>
-                <p class="mt-3">
-                  Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                  do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                </p>
-              </header>
-            </div>
-          </dv>
-
-          <div
-            class="row product-slider swiper"
-            data-aos="fade-up"
-            data-aos-delay="200">
-            <div class="swiper-wrapper">
-                @foreach ($recentlyViewed as $item)
-                <div class="swiper-slide col-lg-3">
-                    <div class="card">
-                      <div class="card-img">
-                        <div class="wishlist">
-                          <button>
-                            <i class="bi bi-heart"></i>
-                            <i class="bi bi-heart-fill d-none"></i>
-                          </button>
-                        </div>
-                        <img
-                          src="{{ asset('storage/images/' . $item->product->feature_image) }}"
-                          alt=""
-                          class="img-fluid"
-                        />
-                      </div>
-                      <div class="content">
-                        <a href="#">
-                            <p>{{ $item->product->title }}</p>
-                            <p><span>{{ $item->product->variant->count() > 1 ? Config::get('app.currency_code') . $item->product->variant->min('sales_price') . ' - ' . Config::get('app.currency_code') . $item->product->variant->max('sales_price') : Config::get('app.currency_code') . $item->product->variant->min('sales_price') }}</span>
+        <section class="popular pt-5">
+            <div class="container" data-aos="fade-up">
+                <dv class="row justify-content-center">
+                    <div class="col-md-9">
+                        <header class="text-center mb-3">
+                            <h3 class="mb-0">RECENTLY VIEWED</h3>
+                            <div class="line mt-0"></div>
+                            <p class="mt-3">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                                do eiusmod tempor incididunt ut labore et dolore magna aliqua.
                             </p>
-                        </a>
-                      </div>
+                        </header>
                     </div>
-                  </div>
-                @endforeach
+                </dv>
+
+                <div class="row product-slider swiper" data-aos="fade-up" data-aos-delay="200">
+                    <div class="swiper-wrapper">
+                        @foreach ($recentlyViewed as $item)
+                            <div class="swiper-slide col-lg-3">
+                                <div class="card">
+                                    <div class="card-img">
+                                        <div class="wishlist">
+                                            <button class="wish-list-button" data-id="{{ $item->product->product_id }}">
+                                                {!! Auth::check() && $item->product->wishList->where('user_id', Auth::user()->id)->count() != 0
+                                                    ? '<i class="bi bi-heart-fill"></i>'
+                                                    : '<i
+                                                                                        class="bi bi-heart"></i>' !!}
+                                            </button>
+                                        </div>
+                                        <a href="{{ route('view-item', $item->product->product_id) }}">
+                                            <img src="{{ asset('storage/images/' . $item->product->feature_image) }}"
+                                                alt="" class="img-fluid" />
+                                        </a>
+
+                                    </div>
+                                    <div class="content">
+                                        <a href="{{ route('view-item', $item->product->product_id) }}">
+                                            <p>{{ $item->product->title }}</p>
+                                            <p>
+                                                <span>{{ $item->product->variant->count() > 1
+                                                    ? Config::get('app.currency_code') .
+                                                        $item->product->variant->min('sales_price') .
+                                                        ' - ' .
+                                                        Config::get('app.currency_code') .
+                                                        $item->product->variant->max('sales_price')
+                                                    : Config::get('app.currency_code') . $item->product->variant->min('sales_price') }}</span>
+                                            </p>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    </div>
+                    <div class="swiper-pagination"></div>
+                </div>
             </div>
-            <div class="swiper-pagination"></div>
-          </div>
-        </div>
-      </section>
-      <!-- End popuar Section -->
+        </section>
+        <!-- End popuar Section -->
 
     </main>
     <!-- End #main -->
@@ -385,10 +405,10 @@
         });
 
         function updatePrice() {
-            @if($product->variant->count() == 1)
-            price = Number($('#selector').data('price'));
+            @if ($product->variant->count() == 1)
+                price = Number($('#selector').data('price'));
             @else
-            price = Number($('#size').find(':selected').data('price'));
+                price = Number($('#size').find(':selected').data('price'));
             @endif
             $("input[type='radio'].variation:checked").each(function() {
                 let percentage = $(this).data("percentage");
@@ -448,7 +468,29 @@
                 });
             }
 
-            
+
+        });
+
+        $('.wish-list-button').click(function() {
+            let product_id = $(this).data('id');
+            let $this = $(this);
+            $.ajax({
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                },
+                url: "{{ route('add-to-wish') }}",
+                method: "POST",
+                data: {
+                    id: product_id
+                },
+                success: function(data) {
+                    if (data.wishlist) {
+                        $this.html('<i class="bi bi-heart-fill"></i>');
+                    } else {
+                        $this.html('<i class="bi bi-heart"></i>');
+                    }
+                }
+            })
         });
     </script>
 @endpush

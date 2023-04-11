@@ -559,6 +559,7 @@
 <script>
     $('.wish-list-button').click(function(){
             let product_id = $(this).data('id');
+            let $this = $(this);
             $.ajax({
                 headers: {
                     'X-CSRF-TOKEN': '{{ csrf_token() }}'
@@ -570,9 +571,9 @@
                 },
                 success: function(data) {
                     if(data.wishlist){
-                        $(this).html('<i class="bi bi-heart-fill"></i>');
+                        $this.html('<i class="bi bi-heart-fill"></i>');
                     }else{
-                        $(this).html('<i class="bi bi-heart"></i>');
+                        $this.html('<i class="bi bi-heart"></i>');
                     }
                 }
             })
