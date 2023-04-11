@@ -131,12 +131,14 @@
           </form>
             @endguest
 
-                @if (Auth::check())
+            @auth
             <button onclick="window.location.href='{{ route('cart') }}';" data-toggle="tooltip" title="Cart"><i class="bi bi-bag"></i><span
-                    class="count-indicator">
-                        {{ Auth::user()->cart->count() }}
-                </span></button>
-                @endif
+              class="count-indicator">
+                  {{ Auth::user()->cart->count() }}
+          </span></button>
+          @else
+          <button onclick="window.location.href='{{ route('cart') }}';" data-toggle="tooltip" title="Cart"><i class="bi bi-bag"></i></button>
+          @endauth
         </div>
           <!-- .navbar -->
         </div>

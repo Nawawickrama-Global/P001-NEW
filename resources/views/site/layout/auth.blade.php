@@ -67,11 +67,14 @@
                 <button data-toggle="tooltip" class="search" title="Search"><i class="bi bi-search"></i></button>
                 <button data-toggle="tooltip" title="Wishlist"><i class="bi bi-heart"></i></button>
                 <button data-toggle="tooltip" title="Login / Register" onclick="window.location='{{ url('/login') }}';"><i class="bi bi-person-circle"></i></button>
-                @if (Auth::check())
-                <button onclick="window.location.href='{{ route('cart') }}';" data-toggle="tooltip" title="Cart"><i class="bi bi-bag"></i><span class="count-indicator">
-                        {{ Auth::user()->cart->count() }}
-                    </span></button>
-                @endif
+                @auth
+                <button onclick="window.location.href='{{ route('cart') }}';" data-toggle="tooltip" title="Cart"><i class="bi bi-bag"></i><span
+                  class="count-indicator">
+                      {{ Auth::user()->cart->count() }}
+              </span></button>
+              @else
+              <button onclick="window.location.href='{{ route('cart') }}';" data-toggle="tooltip" title="Cart"><i class="bi bi-bag"></i></button>
+              @endauth
             </div>
             <!-- .navbar -->
         </div>
