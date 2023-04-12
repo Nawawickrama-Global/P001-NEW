@@ -11,22 +11,24 @@
             <div class="sort mb-1 mb-0">
               <div class="row justify-content-between mb-0 pb-0">
                 <div class="col-md-4 col-sm-4">
-                  <h3>Cart <span id="productCount">(1)</span></h3>
+                  <h3>Cart <span id="productCount">({{ $items->count() }})</span></h3>
                 </div>
                 <div class="col-md-4 col-sm-4">
-                  <h3 class="text-center">Total <span id="productCount">(1)</span></h3>
+                  <h3 class="text-center">Total <span id="total-price">(1)</span></h3>
                 </div>
                 <div class="col-md-4 col-sm-4">
-                  <a href="#" class="greenBtn" style="color: #fff !important; float:right;">CHECKOUT ALL</a>
+                  <a href="{{ route('checkout') }}" class="greenBtn" style="color: #fff !important; float:right;">CHECKOUT ALL</a>
                 </div>
               </div>
             </div>
             <hr>
             <div class="col-lg-12">
               <div class="text-center text-danger mt-5">
+                @if ($items->count() == 0)
                 <p><b>
                   You haven't saved any items to your wishlist yet. Start shopping and add your favorite items to your wishlist.
                 </b></p>
+                @endif
               </div>
             </div>
             
@@ -76,71 +78,74 @@
                         </div>
                     @endforeach
                 </div>
+                @if ($items->count() != 0)
                 <div class="col-lg-6">
-                    <div class="form-section mt-3">
-                        <p>Do you have a coupon code?</p>
-                        <form action="{{ route('apply-coupon') }}" method="POST">
-                            @csrf
-                            <div class="row align-items-center justify-content-center">
-                                <div class="col-lg-7">
-                                    <input type="text" id="couponCode" class="@error('couponCode') is-invalid @enderror"
-                                        name="couponCode" placeholder="Coupon code" /><br />
-                                    @error('couponCode')
-                                        <div class="invalid-feedback">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
-                                </div>
-                                <div class="col-lg-5">
-                                    <button class="m-0">APPLY COUPON</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                    <div class="form-section mt-3">
-                        <h3 class="mb-3 h4">ORDER SUMMARY</h3>
-                        @php
-                            $total = $subTotal;
-                            if (session()->has('coupon')) {
-                                $value = session()->get('coupon')['amount'];
-                                if (session()->get('coupon')['type'] == 'fixed') {
-                                    $total = $subTotal - $value;
-                                    $couponAmount = Config::get('app.currency_code') . $value;
-                                } else {
-                                    $total = $subTotal - ($subTotal * $value) / 100;
-                                    $couponAmount = Config::get('app.currency_code') . ($subTotal * $value) / 100;
-                                }
-                            }
-                        @endphp
-                        <p class="d-flex justify-content-between">
-                            <span>Sub total</span> <span
-                                id="subTotal">{{ Config::get('app.currency_code') . number_format($subTotal, 2) }}</span>
-                        </p>
-                        <p class="d-flex justify-content-between">
-                            <span>Coupon</span> <span
-                                id="couonCost">{{ session()->has('coupon') ? $couponAmount : '-' }}</span>
-                        </p>
-                        <p class="d-flex justify-content-between">
-                            <span>Discount </span> <span id="discuntCost">-</span>
-                        </p>
-                        <hr />
-                        <p class="d-flex justify-content-between">
-                            <span><strong>Total</strong></span>
-                            <span ><strong id="total">{{ Config::get('app.currency_code') . number_format($total, 2) }}</strong></span>
-                        </p>
-                    </div>
+                  <div class="form-section mt-3">
+                      <p>Do you have a coupon code?</p>
+                      <form action="{{ route('apply-coupon') }}" method="POST">
+                          @csrf
+                          <div class="row align-items-center justify-content-center">
+                              <div class="col-lg-7">
+                                  <input type="text" id="couponCode" class="@error('couponCode') is-invalid @enderror"
+                                      name="couponCode" placeholder="Coupon code" /><br />
+                                  @error('couponCode')
+                                      <div class="invalid-feedback">
+                                          {{ $message }}
+                                      </div>
+                                  @enderror
+                              </div>
+                              <div class="col-lg-5">
+                                  <button class="m-0">APPLY COUPON</button>
+                              </div>
+                          </div>
+                      </form>
+                  </div>
+                  <div class="form-section mt-3">
+                      <h3 class="mb-3 h4">ORDER SUMMARY</h3>
+                      @php
+                          $total = $subTotal;
+                          if (session()->has('coupon')) {
+                              $value = session()->get('coupon')['amount'];
+                              if (session()->get('coupon')['type'] == 'fixed') {
+                                  $total = $subTotal - $value;
+                                  $couponAmount = Config::get('app.currency_code') . $value;
+                              } else {
+                                  $total = $subTotal - ($subTotal * $value) / 100;
+                                  $couponAmount = Config::get('app.currency_code') . ($subTotal * $value) / 100;
+                              }
+                          }
+                      @endphp
+                      <p class="d-flex justify-content-between">
+                          <span>Sub total</span> <span
+                              id="subTotal">{{ Config::get('app.currency_code') . number_format($subTotal, 2) }}</span>
+                      </p>
+                      <p class="d-flex justify-content-between">
+                          <span>Coupon</span> <span
+                              id="couonCost">{{ session()->has('coupon') ? $couponAmount : '-' }}</span>
+                      </p>
+                      <p class="d-flex justify-content-between">
+                          <span>Discount </span> <span id="discuntCost">-</span>
+                      </p>
+                      <hr />
+                      <p class="d-flex justify-content-between">
+                          <span><strong>Total</strong></span>
+                          <span ><strong id="total">{{ Config::get('app.currency_code') . number_format($total, 2) }}</strong></span>
+                      </p>
+                  </div>
 
-                    <div class="btn-section mt-3 text-center">
-                        <button onclick="window.location.href='{{ route('checkout') }}'" class="green" type="button"
-                            {{-- data-bs-toggle="modal"
-              data-bs-target="#checkOut" --}}>
-                            CHECKOUT
-                        </button>
-                        <br />
-                        <p class="mt-3">OR</p>
-                        <button class="primary">ADD TO QUOTE</button>
-                    </div>
-                </div>
+                  <div class="btn-section mt-3 text-center">
+                      <button onclick="window.location.href='{{ route('checkout') }}'" class="green" type="button"
+                          {{-- data-bs-toggle="modal"
+            data-bs-target="#checkOut" --}}>
+                          CHECKOUT
+                      </button>
+                      <br />
+                      <p class="mt-3">OR</p>
+                      <button class="primary">ADD TO QUOTE</button>
+                  </div>
+              </div>
+                @endif
+     
             </div>
         </div>
     </section>
@@ -364,6 +369,7 @@
         let $this = null;
         let url = null;
         let total = {{ $subTotal }};
+        $('#total-price').html('({{ Config::get('app.currency_code') }}' + total + ')');
 
         $('.remove').click(function() {
             url = "{{ route('remove-cart') }}";
@@ -415,6 +421,7 @@
                     }
                     $('#subTotal').text('{{ Config::get('app.currency_code') }}' + (data.total_price).toFixed(2));
                     $('#total').text('{{ Config::get('app.currency_code') }}'+(data.total_price - coupon).toFixed(2));
+                    $('#total-price').html('({{ Config::get('app.currency_code') }}' + (data.total_price - coupon).toFixed(2) + ')');
                 }
             })
         }
