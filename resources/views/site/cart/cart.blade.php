@@ -52,7 +52,7 @@
                                 <div class="col-5 img-content">
                                     <img src="{{ asset('storage/images/' . $image) }}" alt="Product img" class="img-fluid" />
                                 </div>
-                                <div class="col-7 text-contet">
+                                <div class="col-7 text-contet border-left">
                                     <div class="cross" >
                                         <button class="remove" data-id="{{ $item->cart_id }}" style="border: 1px solid #9D875C">
                                             <i class="bi bi-x"></i>

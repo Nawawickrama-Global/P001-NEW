@@ -78,10 +78,11 @@ textarea.form-control{
   }  
   .shiping-btn label {
           display: inline-block;
-          width: 101px;
+          /* width: 101px; */
           height: 31px;
           border-radius: 5px;
           border: 1px solid #dcdcdc;
+          padding: 0 10px;
   }
   .shiping-btn input[type="radio"]:checked + label {
           border-color: #004c45;
@@ -118,3 +119,7 @@ textarea.form-control{
         left: -5px;
         z-index: 99;
     }
+
+.border-left{
+        border-left: var(--primary-color) 1px solid;
+}

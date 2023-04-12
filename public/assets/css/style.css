@@ -1902,7 +1902,7 @@ input[type="password"] , input[type="email"], input[type="textarea"], input[type
 .cart .img-content {
   position: relative;
   z-index: 2;
-  border-right: var(--primary-color) 1px solid;
+  /* border-right: var(--primary-color) 1px solid; */
 }
 
 .cart .img-content button {
