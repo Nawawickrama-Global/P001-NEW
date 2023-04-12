@@ -111,8 +111,8 @@
                                                 class="shiping @error('shipping_method_id') is-invalid @enderror"
                                                 name="shipping_method_id">
                                             <label for="radio{{ $index }}">
-                                                <span class="shiping-text">{{ $shippingMethod->name }}</span>
-                                                <small>{{ $shippingMethod->description }}</small>
+                                                <span class="shiping-text">{{$shippingMethod->name}}</span> -
+                                                <small>{{$shippingMethod->description}}</small>
                                             </label>
                                         @endforeach
 
