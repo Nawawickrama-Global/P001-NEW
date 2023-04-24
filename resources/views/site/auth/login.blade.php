@@ -6,8 +6,7 @@
             <div class="container content text-center">
                 <h2>Login to your account</h2>
                 <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                    eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    Thank you for visiting Desejo. Please login to your account to continue elevating your interior space with Desejo products.
                 </p>
                 <div class="row justify-content-center">
                     <div class="col-lg-9">

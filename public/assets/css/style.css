@@ -372,7 +372,7 @@ h6 {
 }
 #hero .carousel-item::before {
   content: "";
-  background-color: rgba(0, 0, 0, 0.6);
+  background-color: rgba(0, 0, 0, 0.4);
 }
 #hero .carousel-container {
   display: flex;
@@ -1211,7 +1211,9 @@ section {
   padding-right: 12px;
 }
 .features .feture-tabs .nav-link.active {
-  color: var(--secondary-color);
+  background-color: var(--secondary-color);
+  color: #fff;
+  /* background-color: #4343430A */
 }
 .features .feture-tabs .tab-pane {
   border: #000 1px solid;

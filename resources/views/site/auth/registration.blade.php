@@ -6,8 +6,7 @@
             <div class="container content text-center">
                 <h2>REGISTER NOW</h2>
                 <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                    eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                    Registering an account on our website will unlock features such as adding the products to wishlist, create moodboards and proceed with purchase.
                 </p>
                 <div class="row justify-content-center">
                     <div class="col-lg-10">
@@ -30,7 +29,7 @@
                                         <label for="Lname" class="requred">Last Name</label>
                                         <input type="text" name="last_name"
                                             class="form-control @error('last_name') is-invalid @enderror" id="username"
-                                            placeholder="Last name" />
+                                            placeholder="Last Name" />
                                         @error('last_name')
                                             <div class="invalid-feedback">
                                                 {{ $message }}
@@ -42,7 +41,7 @@
                             <div class="form-group mt-3">
                                 <label for="email" class="requred">Email</label>
                                 <input type="text" class="form-control @error('email') is-invalid @enderror"
-                                    name="email" id="email" placeholder="Enter yuour Email" />
+                                    name="email" id="email" placeholder="Enter your Email" />
                                 @error('email')
                                     <div class="invalid-feedback">
                                         {{ $message }}
@@ -86,7 +85,7 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group mt-3">
-                                        <label for="cpassword" class="requred" required>*Confirm Password</label>
+                                        <label for="cpassword" class="requred" required>Confirm Password</label>
                                         <input type="password"
                                             class="form-control @error('confirmed') is-invalid @enderror" name="confirmed"
                                             id="cpassword" placeholder="Enter password" />

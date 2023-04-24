@@ -78,7 +78,7 @@
 
 <main id="main">
   <!-- ======= chose section ======= -->
-  <section class="about mt-5">
+  <section class="about">
     <div class="container d-flex justify-content-center">
       <div class="col-lg-9 text-center pt-3">
         <h2>ABOUT US</h2>
@@ -99,6 +99,7 @@
           <a href="#"><i class="bi bi-linkedin"></i></a>
           <a href="#"><i class="bi bi-whatsapp"></i></a>
           <a href="#"><i class="bi bi-envelope"></i></a>
+          <a href="#"> <img src="assets/img/ap-icon.png" style="height: 36px; width:36px"/> </a>
         </div>
       </div>
     </div>
