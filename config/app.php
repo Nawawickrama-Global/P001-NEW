@@ -174,7 +174,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
+        // League\Omnipay\OmnipayServiceProvider::class,
+        // Burnbright\OmnipayPoli\OmnipayPoliServiceProvider::class,
     ],
 
     /*

@@ -14,13 +14,11 @@
                                 <img src="{{ asset('storage/images/' . $product->feature_image) }}" class="d-block w-100"
                                     alt="Image 1" />
                             </div>
-                            @foreach ($images as $image)
-                                @if ($image != '')
-                                    <div class="carousel-item border-1">
-                                        <img src="{{ asset('storage/images/' . $image) }}" class="d-block w-100"
-                                            alt="variant" />
-                                    </div>
-                                @endif
+                            @foreach ($product->productImages as $image)
+                            <div class="carousel-item border-1">
+                                <img src="{{ asset('storage/images/' . $image->image_path) }}" class="d-block w-100"
+                                    alt="variant" />
+                            </div>
                             @endforeach
                         </div>
                         <a class="carousel-control-prev" href="#productCarousel" role="button" data-slide="prev">
@@ -33,12 +31,10 @@
                     <div id="thumbnailCarousel">
                         <div class="overflow-auto thumbnailClass mt-2">
 
-                            @foreach ($images as $image)
-                                @if ($image != '')
-                                    <div class="thumbnail" data-target="#productCarousel" data-slide-to="0">
-                                        <img src="{{ asset('storage/images/' . $image) }}" class="d-block w-100" />
-                                    </div>
-                                @endif
+                            @foreach ($product->productImages as $image)
+                            <div class="thumbnail" data-target="#productCarousel" data-slide-to="0">
+                                <img src="{{ asset('storage/images/' . $image->image_path) }}" class="d-block w-100" />
+                            </div>
                             @endforeach
                         </div>
                     </div>

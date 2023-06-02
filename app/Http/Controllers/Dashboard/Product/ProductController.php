@@ -8,6 +8,7 @@ use App\Models\Brand;
 use App\Models\Category;
 use App\Models\Product;
 use App\Models\ProductAttribute;
+use App\Models\ProductImage;
 use App\Models\ProductVariation;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
@@ -37,11 +38,7 @@ class ProductController extends Controller
             'sku' => 'required|max:255',
             'sub_category_id' => 'required',
             'feature_img' => 'required|image|mimes:jpeg,png,jpg',
-            'image1' => 'nullable|image|mimes:jpeg,png,jpg',
-            'image2' => 'nullable|image|mimes:jpeg,png,jpg',
-            'image3' => 'nullable|image|mimes:jpeg,png,jpg',
-            'image4' => 'nullable|image|mimes:jpeg,png,jpg',
-            'image5' => 'nullable|image|mimes:jpeg,png,jpg',
+            'product_images.*' => 'nullable|image|mimes:jpeg,png,jpg',
             'short_description' => 'required',
             'long_description' => 'required',
             'sales_price1' => 'required|numeric',
@@ -65,36 +62,17 @@ class ProductController extends Controller
             $request->file('feature_img')->storeAs('images', $feature_img, 'public');
         }
 
-        if($request->hasFile('image1')){
-            $image1 = date('Y-m-d-H-i-s') . $request->file('image1')->getClientOriginalName();
-            $request->file('image1')->storeAs('images', $image1, 'public');
-            $product_img .= ','.$image1;
-        }
-        if($request->hasFile('image2')){
-            $image2 = date('Y-m-d-H-i-s') . $request->file('image2')->getClientOriginalName();
-            $request->file('image2')->storeAs('images', $image2, 'public');
-            $product_img .= ','.$image2;
-        }
-        if($request->hasFile('image3')){
-            $image3 = date('Y-m-d-H-i-s') . $request->file('image3')->getClientOriginalName();
-            $request->file('image3')->storeAs('images', $image3, 'public');
-            $product_img .= ','.$image3;
-        }
-        if($request->hasFile('image4')){
-            $image4 = date('Y-m-d-H-i-s') . $request->file('image4')->getClientOriginalName();
-            $request->file('image4')->storeAs('images', $image4, 'public');
-            $product_img .= ','.$image4;
-        }
-        if($request->hasFile('image5')){
-            $image5 = date('Y-m-d-H-i-s') . $request->file('image5')->getClientOriginalName();
-            $request->file('image5')->storeAs('images', $image5, 'public');
-            $product_img .= ','.$image5;
-        }
-
         try {
 
             DB::transaction(function() use ($feature_img, $product_img, $request) {
                 $product = Product::create(['feature_image' => $feature_img, 'product_image' => $product_img] + $request->all());
+
+                $productImages = $request->file('product_images');
+                foreach ($productImages as $key => $image) {
+                    $imageName = date('Y-m-d-H-i-s') . $image->getClientOriginalName();
+                    $image->storeAs('images', $imageName, 'public');
+                    ProductImage::create(['image_path' => $imageName, 'product_id' =>  $product->product_id]);
+                }
 
                 for ($i=1; $i <= $request->item_count; $i++) { 
                     $size = 'size'.$i;

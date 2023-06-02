@@ -49,4 +49,8 @@ class Product extends Model
         return $this->hasMany(WishList::class, 'product_id');
     }
 
+    public function productImages():HasMany
+    {
+        return $this->hasMany(ProductImage::class, 'product_id', 'product_id');
+    }
 }
